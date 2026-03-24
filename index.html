@@ -411,18 +411,40 @@
     /* ── Responsive ───────────────────────────────────────────── */
     @media (max-width: 700px) {
       .nav { padding: 0.9rem 1.25rem; }
-      .nav__links { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: var(--white); padding: 1rem 1.5rem 1.5rem; border-bottom: 1px solid rgba(43,45,110,0.08); gap: 1rem; }
+      .nav__links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 100%; left: 0; right: 0;
+        background: var(--white);
+        padding: 0.5rem 1.5rem 1.5rem;
+        border-bottom: 1px solid rgba(43,45,110,0.08);
+        gap: 0;
+        box-shadow: 0 8px 24px rgba(43,45,110,0.08);
+      }
       .nav__links.open { display: flex; }
+      /* Větší touch target pro mobilní menu */
+      .nav__links li a {
+        display: block;
+        padding: 0.85rem 0;
+        font-size: 1rem;
+        border-bottom: 1px solid rgba(43,45,110,0.06);
+      }
+      .nav__links li:last-child a { border-bottom: none; }
       .nav__toggle { display: flex; }
+      /* Větší tap area pro hamburger */
+      .nav__toggle { padding: 8px; margin: -8px; }
 
-      #home { padding: 6rem 1.25rem 3rem; min-height: 100svh; }
-      .hero__title { font-size: clamp(2.4rem, 11vw, 3.5rem); }
-      .hero__sub { font-size: 1rem; }
+      #home { padding: 5rem 1.25rem 2.5rem; min-height: 100svh; }
+      .hero__title { font-size: clamp(2.2rem, 10vw, 3.2rem); }
+      .hero__sub { font-size: 0.95rem; }
+      /* Větší touch target pro CTA tlačítko */
+      .btn { padding: 1rem 1.75rem; min-height: 48px; }
 
-      .section { padding: 3.5rem 1.25rem; }
+      .section { padding: 3rem 1.25rem; }
 
       .about__grid { grid-template-columns: 1fr; gap: 1.5rem; }
-      .about__avatar { width: 120px; height: 120px; }
+      .about__avatar { width: 100px; height: 100px; }
 
       .contact__card {
         grid-template-columns: 1fr;
@@ -433,6 +455,7 @@
         width: 100%;
         justify-content: center;
         text-align: center;
+        min-height: 48px;
       }
 
       .footer { padding: 2.5rem 1.25rem 1.5rem; }
@@ -440,6 +463,20 @@
       .footer__bottom { flex-direction: column; align-items: flex-start; gap: 0.75rem; }
 
       .strip__inner { font-size: 0.82rem; }
+
+      /* Zabránit horizontálnímu scrollu */
+      .hero__ring { width: 320px; height: 320px; right: -60px; top: -40px; }
+    }
+
+    /* Přidáme safe area pro iPhone notch */
+    @supports (padding: max(0px)) {
+      .nav {
+        padding-left: max(2rem, env(safe-area-inset-left));
+        padding-right: max(2rem, env(safe-area-inset-right));
+      }
+      .footer {
+        padding-bottom: max(2rem, env(safe-area-inset-bottom));
+      }
     }
   </style>
 </head>
@@ -510,6 +547,8 @@
           class="about__avatar"
           src="img/mirka-avatar.jpg"
           alt="Mirka – zakladatelka Northdrift"
+          width="200" height="200"
+          loading="lazy"
         />
         <div class="about__text">
           <h2 class="section__title">Ahoj, jsem Mirka.</h2>
@@ -603,7 +642,7 @@
 
       <div class="footer__partners">
         <a href="https://www.levelsportkoncept.cz" target="_blank" rel="noopener" style="display:inline-block; border-radius:8px; overflow:hidden; transition: opacity 0.2s; opacity:0.85;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.85'">
-          <img src="img/partner-levelsport.png" alt="Level Sport Koncept" style="height:80px; width:auto; display:block;" />
+          <img src="img/partner-levelsport.png" alt="Level Sport Koncept" width="80" height="80" style="height:80px; width:auto; display:block;" loading="lazy" />
         </a>
       </div>
 
